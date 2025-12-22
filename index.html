@@ -42,38 +42,41 @@
       }
 
     .screen {
-      width: 100%;
-      aspect-ratio: 3 / 4;
-      border-radius: 22px;
-      background: #000000;
-      box-shadow:
-        0 0 0 3px #282B5D,
-        0 0 30px #110FFF;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 22px;
+  background: #000000;
+  box-shadow:
+    0 0 0 3px #282B5D,
+    0 0 30px #110FFF;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .screen-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: #000000;
-      border-radius: 18px;
-      box-shadow: 0 0 0 2px #282B5D inset;
-      overflow: hidden;
-    }
+.screen-inner {
+  position: relative;
+  width: 88%;
+  aspect-ratio: 1 / 2; /* 320x640 = 1:2, сохраняем пропорции поля */
+  border-radius: 18px;
+  background: #000000;
+  box-shadow: 0 0 0 2px #282B5D inset;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    /* холст занимает почти весь экран, но оставляет место под HUD сверху */
-    canvas {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border-radius: 18px;
-      background: #000000;
-    }
+/* ВАЖНО: не растягиваем по height/width независимо */
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: #000000;
+}
 
     .info {
       position: absolute;
