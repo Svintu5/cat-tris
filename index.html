@@ -46,7 +46,7 @@
   <canvas width="480" height="960" id="game"></canvas>
   <script>
     const canvas = document.getElementById('game');
-    const context = canvas.getContext('2d');
+    context.font = '24px monospace';
     context.scale(20, 20);
     
     const CAT_SPRITES = ['🐱', '🐈‍⬛', '🐈', '😺', '😸', '🐾', '🙀'];
@@ -87,9 +87,11 @@
     
     function drawMatrix(matrix, offset, catIndex = 0) {
       matrix.forEach((row, y) => {
-        row.forEach((value, x) => {
-          if (value !== 0) {
-            context.fillText(CAT_SPRITES[catIndex % CAT_SPRITES.length], x + offset.x, y + offset.y);
+      row.forEach((value, x) => {
+      if (value !== 0) {
+        context.fillText(CAT_SPRITES[catIndex % CAT_SPRITES.length], 
+                        (x + offset.x) * 24 + 6, 
+                        (y + offset.y) * 30 + 24);
           }
         });
       });
@@ -97,7 +99,7 @@
     
     function draw() {
       context.fillStyle = '#000';
-      context.fillRect(0, 0, 24, 48);
+      context.fillRect(0, 0, canvas.width, canvas.height);
       drawMatrix(arena, {x: 0, y: 0});
       drawMatrix(player.matrix, player.pos, player.catIndex);
     }
