@@ -55,7 +55,7 @@
     // --- картинки котов (1..7) ---
     const CAT_IMAGES = [];
     const CAT_SRC = [
-      'img/cat1.png', // для value = 1 (T)
+      'img/cat1.png', // 1 (T)
       'img/cat2.png', // 2 (O)
       'img/cat3.png', // 3 (L)
       'img/cat4.png', // 4 (J)
@@ -118,6 +118,7 @@
 
     // Рисуем маленькие картинки котов по значениям 1..7
     function drawMatrix(matrix, offset) {
+      if (!matrix) return;
       matrix.forEach((row, y) => {
         row.forEach((value, x) => {
           if (value !== 0 && imagesLoaded === CAT_SRC.length) {
@@ -136,7 +137,6 @@
       context.fillStyle = '#000';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      // масштабируем поле так, чтобы 20x40 клеток поместились в 480x960
       const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
       const scaleY = canvas.height / (arena.length * CELL_HEIGHT);
       const scale = Math.min(scaleX, scaleY);
@@ -192,7 +192,6 @@
     }
     
     function playerRotate(dir) {
-      const pos = player.pos.x;
       let offset = 1;
       rotate(player.matrix, dir);
       while (collide(arena, player)) {
