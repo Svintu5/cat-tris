@@ -47,12 +47,37 @@
   <script>
     const canvas = document.getElementById('game');
     const context = canvas.getContext('2d');
-    context.font = '20px monospace';
-    
-    const CAT_SPRITES = ['🐱', '🐈‍⬛', '🐈', '😺', '😸', '🐾', '🙀'];
+
+    // --- настройки клеток ---
+    const CELL_SIZE = 24;
+    const CELL_HEIGHT = 24;
+
+    // --- картинки котов (1..7) ---
+    const CAT_IMAGES = [];
+    const CAT_SRC = [
+      'img/cat1.png', // для value = 1 (T)
+      'img/cat2.png', // 2 (O)
+      'img/cat3.png', // 3 (L)
+      'img/cat4.png', // 4 (J)
+      'img/cat5.png', // 5 (I)
+      'img/cat6.png', // 6 (S)
+      'img/cat7.png', // 7 (Z)
+    ];
+
+    let imagesLoaded = 0;
+
+    CAT_SRC.forEach((src, i) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        imagesLoaded++;
+      };
+      CAT_IMAGES[i] = img;
+    });
+
     const arena = createMatrix(20, 40);
     
-    let player = { pos: {x: 0, y: 0}, matrix: null, score: 0, catIndex: 0 };
+    let player = { pos: {x: 0, y: 0}, matrix: null, score: 0 };
     let dropCounter = 0;
     let dropInterval = 800;
     let lastTime = 0;
@@ -90,14 +115,18 @@
         });
       });
     }
-    
-    function drawMatrix(matrix, offset, catIndex = 0) {
+
+    // Рисуем маленькие картинки котов по значениям 1..7
+    function drawMatrix(matrix, offset) {
       matrix.forEach((row, y) => {
         row.forEach((value, x) => {
-          if (value !== 0) {
-            context.fillText(CAT_SPRITES[catIndex % CAT_SPRITES.length], 
-                           x + offset.x + 0.1, 
-                           y + offset.y + 0.7);
+          if (value !== 0 && imagesLoaded === CAT_SRC.length) {
+            const imgIndex = (value - 1) % CAT_IMAGES.length; // 1→0, 2→1, ...
+            const img = CAT_IMAGES[imgIndex];
+            if (!img) return;
+            const px = (x + offset.x) * CELL_SIZE;
+            const py = (y + offset.y) * CELL_HEIGHT;
+            context.drawImage(img, px, py, CELL_SIZE, CELL_HEIGHT);
           }
         });
       });
@@ -106,10 +135,16 @@
     function draw() {
       context.fillStyle = '#000';
       context.fillRect(0, 0, canvas.width, canvas.height);
+
+      // масштабируем поле так, чтобы 20x40 клеток поместились в 480x960
+      const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
+      const scaleY = canvas.height / (arena.length * CELL_HEIGHT);
+      const scale = Math.min(scaleX, scaleY);
+
       context.save();
-      context.scale(20, 20);
+      context.scale(scale, scale);
       drawMatrix(arena, {x: 0, y: 0});
-      drawMatrix(player.matrix, player.pos, player.catIndex);
+      drawMatrix(player.matrix, player.pos);
       context.restore();
     }
     
@@ -150,7 +185,6 @@
       player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
       player.pos.y = 0;
       player.pos.x = (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
-      player.catIndex = Math.floor(Math.random() * CAT_SPRITES.length);
       if (collide(arena, player)) {
         arena.forEach(row => row.fill(0));
         player.score = 0;
