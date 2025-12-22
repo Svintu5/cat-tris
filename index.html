@@ -7,33 +7,34 @@
     html, body { 
       height: 100%; 
       margin: 0; 
-      background: linear-gradient(45deg, #0a0a23, #1a0033); 
+      background: radial-gradient(circle at top, #9B6AF6 0%, #E37DF7 25%, #110FFF 55%, #000000 100%);
       display: flex; 
       align-items: center; 
       justify-content: center; 
       font-family: 'Courier New', monospace; 
-    }
+      color: #FFFFFF;
     canvas { 
-      border: 3px solid #00ff88; 
-      background: #000; 
-      box-shadow: 0 0 30px #00ff88; 
-      border-radius: 8px; 
-    }
+      border-radius: 18px;
+      background: #000000;
+      box-shadow:
+        0 0 0 2px #282B5D,
+        0 0 25px #9B6AF6,
+        0 0 45px #110FFF;
     .info { 
       position: absolute; 
       top: 20px; 
       left: 20px; 
-      color: #00ff88; 
+      color: #FFFFFF; 
       font-size: 18px; 
-      text-shadow: 0 0 10px #00ff88; 
+      text-shadow: 0 0 8px #110FFF; 
     }
     .title { 
       position: absolute; 
       top: 20px; 
       right: 20px; 
-      color: #ff00ff; 
+      color: #E37DF7; 
       font-size: 24px; 
-      text-shadow: 0 0 15px #ff00ff; 
+      text-shadow: 0 0 15px #9B6AF6; 
     }
   </style>
 </head>
@@ -134,7 +135,7 @@
     }
     
     function draw() {
-      context.fillStyle = '#000';
+      context.fillStyle = '#000000';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
