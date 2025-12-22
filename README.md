@@ -1,1 +1,1 @@
-# cat-tris
+Cat-tris 🐱 GenLayer Edition
