@@ -46,10 +46,16 @@
   <canvas width="480" height="960" id="game"></canvas>
   <script>
     const canvas = document.getElementById('game');
-    context.font = '24px monospace';
-    context.scale(20, 20);
+    const context = canvas.getContext('2d');
+    context.font = '20px monospace';
     
     const CAT_SPRITES = ['🐱', '🐈‍⬛', '🐈', '😺', '😸', '🐾', '🙀'];
+    const arena = createMatrix(20, 40);
+    
+    let player = { pos: {x: 0, y: 0}, matrix: null, score: 0, catIndex: 0 };
+    let dropCounter = 0;
+    let dropInterval = 800;
+    let lastTime = 0;
     
     function createMatrix(w, h) {
       const matrix = [];
@@ -87,11 +93,11 @@
     
     function drawMatrix(matrix, offset, catIndex = 0) {
       matrix.forEach((row, y) => {
-      row.forEach((value, x) => {
-      if (value !== 0) {
-        context.fillText(CAT_SPRITES[catIndex % CAT_SPRITES.length], 
-                        (x + offset.x) * 24 + 6, 
-                        (y + offset.y) * 30 + 24);
+        row.forEach((value, x) => {
+          if (value !== 0) {
+            context.fillText(CAT_SPRITES[catIndex % CAT_SPRITES.length], 
+                           x + offset.x + 0.1, 
+                           y + offset.y + 0.7);
           }
         });
       });
@@ -100,8 +106,11 @@
     function draw() {
       context.fillStyle = '#000';
       context.fillRect(0, 0, canvas.width, canvas.height);
+      context.save();
+      context.scale(20, 20);
       drawMatrix(arena, {x: 0, y: 0});
       drawMatrix(player.matrix, player.pos, player.catIndex);
+      context.restore();
     }
     
     function arenaSweep() {
@@ -126,6 +135,7 @@
         merge(arena, player);
         playerReset();
         arenaSweep();
+        updateScore();
       }
       dropCounter = 0;
     }
@@ -166,12 +176,6 @@
       if (dir > 0) matrix.forEach(row => row.reverse());
       else matrix.reverse();
     }
-    
-    let dropCounter = 0;
-    let dropInterval = 1000;
-    let lastTime = 0;
-    let player = { pos: {x: 0, y: 0}, matrix: null, score: 0, catIndex: 0 };
-    const arena = createMatrix(12, 20);
     
     function update(time = 0) {
       const deltaTime = time - lastTime;
