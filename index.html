@@ -11,14 +11,17 @@
     html, body {
       height: 100%;
       margin: 0;
-    background: radial-gradient(circle at 50% 20%, #E37DF7 0%, #9B6AF6 45%, #282B5D 80%, #000000 100%);
+      background-color: #000000; /* базовый фон везде */
+      background-image: radial-gradient(circle at 50% 20%, #E37DF7 0%, #9B6AF6 35%, #110FFF 70%, #000000 100%);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;  /* градиент строго на весь вьюпорт */
+      background-attachment: fixed; /* закрепить за окном */
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Switzer', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: #FFFFFF;
     }
-
 
     .wrapper {
       position: relative;
