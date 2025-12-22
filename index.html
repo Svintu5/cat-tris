@@ -27,19 +27,19 @@
       color: #FFFFFF;
     }
 
-    .device {
-      width: 360px;
-      padding: 16px 16px 24px;
-      border-radius: 32px;
-      background: radial-gradient(circle at 20% 0%, #ff4ca3 0%, #ff1f7d 40%, #c6005b 100%);
-      box-shadow:
-        0 0 0 4px #ff7ac0 inset,
-        0 18px 40px rgba(0,0,0,0.65);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
+       .device {
+        width: 360px;
+        padding: 16px 16px 24px;
+        border-radius: 32px;
+        background: #9B6AF6;
+        box-shadow:
+          0 0 0 4px #E37DF7 inset,
+          0 18px 40px rgba(0,0,0,0.65);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
 
     .screen {
       width: 100%;
@@ -58,25 +58,30 @@
 
     .screen-inner {
       position: relative;
-      width: 92%;
-      height: 92%;
+      width: 100%;
+      height: 100%;
       background: #000000;
       border-radius: 18px;
       box-shadow: 0 0 0 2px #282B5D inset;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
     }
 
+    /* холст занимает почти весь экран, но оставляет место под HUD сверху */
     canvas {
-      border-radius: 12px;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
       background: #000000;
     }
 
     .info {
       position: absolute;
-      top: 8px;
-      left: 12px;
+      top: 6px;
+      left: 10px;
+      padding: 2px 4px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
       color: #FFFFFF;
       font-size: 11px;
       text-shadow: 0 0 4px #110FFF;
@@ -85,8 +90,11 @@
 
     .title {
       position: absolute;
-      top: 8px;
-      right: 12px;
+      top: 6px;
+      right: 10px;
+      padding: 2px 6px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
       color: #E37DF7;
       font-size: 13px;
       font-weight: 600;
