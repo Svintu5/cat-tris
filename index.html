@@ -392,6 +392,8 @@
     let dropInterval = 800;
     let lastTime = 0;
 
+    let fastDrop = false;
+
     const SPEED_STEP = 0.95;
     const MIN_DROP_INTERVAL = 120;
 
@@ -566,9 +568,15 @@
         return;
       }
       const deltaTime = time - lastTime;
-      lastTime = time;
-      dropCounter += deltaTime;
-      if (dropCounter > dropInterval) playerDrop();
+lastTime = time;
+dropCounter += deltaTime;
+
+let currentInterval = dropInterval;
+if (fastDrop) {
+  currentInterval = dropInterval * 0.15; // во много раз быстрее
+}
+
+if (dropCounter > currentInterval) playerDrop();
       draw();
       requestAnimationFrame(update);
     }
@@ -620,26 +628,33 @@
       else if (event.keyCode === 38) handleAction('up');
     });
 
-    document.querySelectorAll('[data-action]').forEach(btn => {
-      const action = btn.getAttribute('data-action');
+document.querySelectorAll('[data-action]').forEach(btn => {
+  const action = btn.getAttribute('data-action');
 
-      const press = e => {
-        e.preventDefault();
-        handleAction(action);
-        btn.classList.add('pressed');
-      };
+  const press = e => {
+    e.preventDefault();
+    if (action === 'down') {
+      fastDrop = true;       // при удержании ▼ ускоряем
+    } else {
+      handleAction(action);
+    }
+    btn.classList.add('pressed');
+  };
 
-      const release = e => {
-        e.preventDefault();
-        btn.classList.remove('pressed');
-      };
+  const release = e => {
+    e.preventDefault();
+    if (action === 'down') {
+      fastDrop = false;      // отпустили ▼ — снова обычная скорость
+    }
+    btn.classList.remove('pressed');
+  };
 
-      btn.addEventListener('mousedown', press);
-      btn.addEventListener('mouseup', release);
-      btn.addEventListener('mouseleave', release);
-      btn.addEventListener('touchstart', press);
-      btn.addEventListener('touchend', release);
-    });
+  btn.addEventListener('mousedown', press);
+  btn.addEventListener('mouseup', release);
+  btn.addEventListener('mouseleave', release);
+  btn.addEventListener('touchstart', press);
+  btn.addEventListener('touchend', release);
+});
 
     playerReset();
     updateScore();
