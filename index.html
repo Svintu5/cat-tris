@@ -77,12 +77,12 @@ canvas {
   background: #000000;
 }
 
-    .hint-bar {
+  .hint-bar {
   position: absolute;
-  top: 24px;
+  top: 60px;                /* было 24/46 — опускаем ниже заголовка */
   left: 50%;
   transform: translateX(-50%);
-  font-size: 22px;              /* в 2 раза больше, чем было ~11px */
+  font-size: 22px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -93,28 +93,29 @@ canvas {
     
 .info {
   position: absolute;
-  bottom: 8px;          /* вместо top */
-  left: 10px;
-  padding: 4px 8px;
-  background: rgba(0, 0, 0, 0.6);
+  bottom: 2px;              /* прижать к нижней границе (было 8px) */
+  left: 4px;                /* левее (было 10px) */
+  padding: 6px 10px;        /* чуть больше отступов */
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 999px;
   color: #FFFFFF;
-  font-size: 12px;
-  text-shadow: 0 0 4px #110FFF;
+  font-size: 18px;          /* было 12px → 18px (×1.5) */
+  font-weight: 600;
+  text-shadow: 0 0 6px #110FFF;
   pointer-events: none;
 }
 
-    .title-main {
+.title-main {
   position: absolute;
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 26px;              /* примерно в 2 раза больше прежних ~13px */
+  font-size: 32px;          /* было 26 — ещё крупнее, примерно в 2 раза от старого */
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #E37DF7;
-  text-shadow: 0 0 14px #9B6AF6;
+  text-shadow: 0 0 18px #9B6AF6;
   pointer-events: none;
 }
 
