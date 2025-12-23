@@ -305,6 +305,12 @@
     const canvas = document.getElementById('game');
     const context = canvas.getContext('2d');
 
+    // фон с логотипом
+    const logoBg = new Image();
+    let logoBgReady = false;
+    logoBg.src = 'img/logo.png';
+    logoBg.onload = () => { logoBgReady = true; };
+    
     const CELL_SIZE = 24;
     const CELL_HEIGHT = 24;
 
@@ -410,9 +416,23 @@ function draw() {
 
   context.save();
   context.scale(scale, scale);
+
+  // фон‑логотип под стаканом
+  if (logoBgReady) {
+    context.globalAlpha = 0.22; // лёгкая прозрачность
+    context.drawImage(
+      logoBg,
+      0, 0,
+      arena[0].length * CELL_SIZE,
+      arena.length * CELL_HEIGHT
+    );
+    context.globalAlpha = 1;
+  }
+
+  // статичный стакан
   drawMatrix(arena, { x: 0, y: 0 });
 
-  // рисуем фигуру только после старта игры
+  // фигура только после старта
   if (gameStarted && player.matrix) {
     drawMatrix(player.matrix, player.pos);
   }
