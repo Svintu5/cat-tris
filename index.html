@@ -93,16 +93,17 @@ canvas {
     
 .info {
   position: absolute;
-  top: 4px;              
-  left: 4px;                /* левее (было 10px) */
-  padding: 6px 10px;        /* чуть больше отступов */
+  top: 12px;              
+  left: 12px;               
+  padding: 6px 10px;        
   background: rgba(0, 0, 0, 0.7);
   border-radius: 999px;
   color: #FFFFFF;
-  font-size: 18px;          /* было 12px → 18px (×1.5) */
+  font-size: 18px;        
   font-weight: 600;
   text-shadow: 0 0 6px #110FFF;
   pointer-events: none;
+  z-index: 10;  
 }
 
 .title-main {
@@ -253,10 +254,10 @@ canvas {
 </div>
   <div class="device">
     <div class="screen">
+        <div class="info">
+       Score: <span id="score">0</span>
       <div class="screen-inner">
-             <div class="info">
-             Score: <span id="score">0</span>
-        </div>
+      </div>
         <div id="startOverlay">Press Enter to start</div>
         <canvas width="240" height="360" id="game"></canvas>
       </div>
