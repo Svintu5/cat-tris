@@ -4,13 +4,10 @@
   <title>🐱 Cat-tris GenLayer Edition</title>
   <meta charset="UTF-8">
 
-  <!-- Switzer -->
   <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       height: 100%;
@@ -19,7 +16,6 @@
       background-image: radial-gradient(circle at 50% 20%, #E37DF7 0%, #9B6AF6 35%, #110FFF 70%, #000000 100%);
       background-repeat: no-repeat;
       background-size: 100% 100%;
-      background-attachment: fixed;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -27,54 +23,53 @@
       color: #FFFFFF;
     }
 
-.device {
-  width: 400px;
-  padding: 24px 24px 32px;
-  border-radius: 32px;
-  background: #9B6AF6;
-  box-shadow:
-    0 0 0 4px #E37DF7 inset,
-    0 18px 40px rgba(0,0,0,0.65);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
+    .device {
+      width: 380px;
+      padding: 20px 20px 28px;
+      border-radius: 32px;
+      background: #9B6AF6;
+      box-shadow:
+        0 0 0 4px #E37DF7 inset,
+        0 18px 40px rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
 
-  .screen {
-  width: 360px;          /* ширина корпуса под экран */
-  height: 480px;         /* ровно в 2 раза выше (под 320x640) */
-  border-radius: 22px;
-  background: #000000;
-  box-shadow:
-    0 0 0 3px #282B5D,
-    0 0 30px #110FFF;
-  position: relative;
-  overflow: visible;     /* НИЧЕГО не режем */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .screen {
+      width: 100%;
+      height: 460px;  /* под поле 10x15 */
+      border-radius: 22px;
+      background: #000000;
+      box-shadow:
+        0 0 0 3px #282B5D,
+        0 0 30px #110FFF;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-.screen-inner {
-  position: relative;
-  width: 320px;          /* как у canvas */
-  height: 640px;         /* как у canvas */
-  border-radius: 18px;
-  background: #000000;
-  box-shadow: 0 0 0 2px #282B5D inset;
-  overflow: visible;     /* чтобы низ не резался */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .screen-inner {
+      position: relative;
+      width: 320px;
+      height: 480px;  /* 10x15, чуть с запасом сверху/снизу */
+      border-radius: 18px;
+      background: #000000;
+      box-shadow: 0 0 0 2px #282B5D inset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-/* ВАЖНО: не растягиваем по height/width независимо */
-canvas {
-  display: block;
-  border-radius: 18px;
-  background: #000000;
-}
+    canvas {
+      display: block;
+      border-radius: 18px;
+      background: #000000;
+    }
 
     .info {
       position: absolute;
@@ -123,36 +118,24 @@ canvas {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 8px 8px 0;
+      padding: 4px 10px 0;
       gap: 8px;
-    }
-
-    .dpad, .buttons-right {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
     }
 
     .dpad {
       width: 55%;
+      display: flex;
       justify-content: center;
+      align-items: center;
     }
 
     .buttons-right {
-      width: 35%;               /* было ~40%, уменьшаем на ~20% */
+      width: 35%;
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: center;  /* центрируем блок */
     }
 
-   .btn-start {
-      width: 96px;             
-      height: 96px;
-      font-size: 13px;
-    }
-    
     .dpad-container {
       position: relative;
       width: 150px;
@@ -160,8 +143,8 @@ canvas {
     }
 
     .btn-circle {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: none;
       cursor: pointer;
@@ -181,15 +164,15 @@ canvas {
       transition: transform 0.05s ease, box-shadow 0.05s ease, filter 0.05s ease;
     }
 
-    .btn-circle.btn-start {
-      width: 96px !important;
-      height: 96px !important;
-      font-size: 16px;
-    }
-    
     .btn-circle.blue {
       background: radial-gradient(circle at 30% 30%, #c9f2ff 0%, #35d4ff 40%, #00a2ff 70%, #0070c0 100%);
       color: #00163a;
+    }
+
+    .btn-circle.btn-start {
+      width: 96px;
+      height: 96px;
+      font-size: 16px;
     }
 
     .btn-circle.pressed {
@@ -228,17 +211,17 @@ canvas {
       transform: translate(0, -50%);
     }
 
-    .btn-label {
-      font-size: 8px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
     .btn-stack {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 2px;
+    }
+
+    .btn-label {
+      font-size: 8px;
+      text-transform: uppercase;
+      margin-top: 2px;
     }
   </style>
 </head>
@@ -304,7 +287,7 @@ canvas {
       CAT_IMAGES[i] = img;
     });
 
-    const arena = createMatrix(10, 15);
+    const arena = createMatrix(10, 15);   // поле 10x15
 
     let player = { pos: { x: 0, y: 0 }, matrix: null, score: 0 };
     let dropCounter = 0;
@@ -481,7 +464,7 @@ canvas {
       if (action === 'left') playerMove(-1);
       if (action === 'right') playerMove(1);
       if (action === 'down') playerDrop();
-      if (action === 'rotate' || action === 'up') playerRotate(1);
+      if (action === 'up') playerRotate(1);
     }
 
     document.addEventListener('keydown', event => {
@@ -495,7 +478,7 @@ canvas {
       if (event.keyCode === 37) handleAction('left');
       else if (event.keyCode === 39) handleAction('right');
       else if (event.keyCode === 40) handleAction('down');
-      else if (event.keyCode === 38) handleAction('rotate');
+      else if (event.keyCode === 38) handleAction('up');
       else if (event.keyCode === 32) playerReset();
     });
 
