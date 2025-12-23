@@ -9,19 +9,23 @@
   <style>
     * { box-sizing: border-box; }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      background-color: #000000;
-      background-image: radial-gradient(circle at 50% 20%, #E37DF7 0%, #9B6AF6 35%, #110FFF 70%, #000000 100%);
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Switzer', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #FFFFFF;
-    }
+html, body {
+  height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at 20% 0%, #E37DF7 0%, rgba(227,125,247,0) 40%),
+    radial-gradient(circle at 80% 100%, #110FFF 0%, rgba(17,15,255,0) 45%),
+    radial-gradient(circle at 50% 40%, #9B6AF6 0%, rgba(155,106,246,0) 55%),
+    #000000;
+  background-repeat: no-repeat;
+  background-size: cover;          /* растянуть ровно на весь экран */
+  background-attachment: fixed;    /* не перерисовывать при прокрутке */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Switzer', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #FFFFFF;
+}
 
     .device {
       width: 380px;
