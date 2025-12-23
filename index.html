@@ -25,6 +25,12 @@
       color: #FFFFFF;
     }
 
+    .machine {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .device {
       position: relative;
       width: 380px;
@@ -271,7 +277,7 @@
 
     /* промо-бейдж под корпусом, справа */
     .promo {
-      width: 380px;          /* как .device */
+      width: 380px;
       margin-top: 8px;
       display: flex;
       justify-content: flex-end;
@@ -302,45 +308,46 @@
     ←→ Move | ↑ Rotate | ↓ Drop
   </div>
 
-  <div class="device">
-    <img src="img/hat.png" alt="" class="xmas-hat">
+  <div class="machine">
+    <div class="device">
+      <img src="img/hat.png" alt="" class="xmas-hat">
 
-    <div class="screen">
-      <div class="info">
-        Score: <span id="score">0</span>
-      </div>
-      <div class="top-score">
-        Top: <span id="topScore">0</span>
-      </div>
+      <div class="screen">
+        <div class="info">
+          Score: <span id="score">0</span>
+        </div>
+        <div class="top-score">
+          Top: <span id="topScore">0</span>
+        </div>
 
-      <div class="screen-inner">
-        <div id="startOverlay">Press Enter to start</div>
-        <canvas width="240" height="360" id="game"></canvas>
-      </div>
-    </div>
-
-    <div class="controls">
-      <div class="dpad">
-        <div class="dpad-container">
-          <button class="btn-circle dpad-button" data-action="up">▲</button>
-          <button class="btn-circle dpad-button" data-action="down">▼</button>
-          <button class="btn-circle dpad-button" data-action="left">◀</button>
-          <button class="btn-circle dpad-button" data-action="right">▶</button>
+        <div class="screen-inner">
+          <div id="startOverlay">Press Enter to start</div>
+          <canvas width="240" height="360" id="game"></canvas>
         </div>
       </div>
 
-      <div class="buttons-right">
-        <div class="btn-stack">
-          <button class="btn-circle blue btn-start" data-action="start">START</button>
+      <div class="controls">
+        <div class="dpad">
+          <div class="dpad-container">
+            <button class="btn-circle dpad-button" data-action="up">▲</button>
+            <button class="btn-circle dpad-button" data-action="down">▼</button>
+            <button class="btn-circle dpad-button" data-action="left">◀</button>
+            <button class="btn-circle dpad-button" data-action="right">▶</button>
+          </div>
+        </div>
+
+        <div class="buttons-right">
+          <div class="btn-stack">
+            <button class="btn-circle blue btn-start" data-action="start">START</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- промо под корпусом -->
-  <div class="promo">
-    <span class="promo-text">Made for</span>
-    <img src="img/genlayer-logo.svg" alt="GenLayer" class="promo-logo">
+    <div class="promo">
+      <span class="promo-text">Made for</span>
+      <img src="img/genlayer-logo.svg" alt="GenLayer" class="promo-logo">
+    </div>
   </div>
 
   <script>
