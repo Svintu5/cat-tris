@@ -18,8 +18,8 @@ html, body {
     radial-gradient(circle at 50% 40%, #9B6AF6 0%, rgba(155,106,246,0) 55%),
     #000000;
   background-repeat: no-repeat;
-  background-size: cover;          /* растянуть ровно на весь экран */
-  background-attachment: fixed;    /* не перерисовывать при прокрутке */
+  background-size: cover;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +43,7 @@ html, body {
 
    .screen {
   width: 100%;
-  height: 400px;  /* под 240x360 + рамка */
+  height: 400px;
   border-radius: 22px;
   background: #000000;
   box-shadow:
@@ -58,8 +58,8 @@ html, body {
 
  .screen-inner {
   position: relative;
-  width: 240px;   /* как width canvas */
-  height: 360px;  /* как height canvas */
+  width: 240px;
+  height: 360px;
   border-radius: 18px;
   background: #000000;
   box-shadow: 0 0 0 2px #282B5D inset;
@@ -79,7 +79,7 @@ canvas {
 
   .hint-bar {
   position: absolute;
-  top: 60px;                /* было 24/46 — опускаем ниже заголовка */
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 22px;
@@ -93,17 +93,17 @@ canvas {
     
 .info {
   position: absolute;
-  top: 12px;              
-  left: 12px;               
-  padding: 6px 10px;        
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 999px;
   color: #FFFFFF;
-  font-size: 18px;        
+  font-size: 18px;
   font-weight: 600;
   text-shadow: 0 0 6px #110FFF;
   pointer-events: none;
-  z-index: 10;  
+  z-index: 10;
 }
 
 .title-main {
@@ -111,7 +111,7 @@ canvas {
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 32px;          /* было 26 — ещё крупнее, примерно в 2 раза от старого */
+  font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -249,20 +249,20 @@ canvas {
 </head>
 <body>
   <div class="title-main">🐱 CAT-TRIS 🐱</div>
-<div class="hint-bar">
-  ←→ Move | ↑ Rotate | ↓ Drop | Space Restart
-</div>
-<div class="device">
-  <div class="screen">
-    <div class="info">
-      Score: <span id="score">0</span>
-    </div>
-
-    <div class="screen-inner">
-      <div id="startOverlay">Press Enter to start</div>
-      <canvas width="240" height="360" id="game"></canvas>
-    </div>
+  <div class="hint-bar">
+    ←→ Move | ↑ Rotate | ↓ Drop | Space Restart
   </div>
+  <div class="device">
+    <div class="screen">
+      <div class="info">
+        Score: <span id="score">0</span>
+      </div>
+
+      <div class="screen-inner">
+        <div id="startOverlay">Press Enter to start</div>
+        <canvas width="240" height="360" id="game"></canvas>
+      </div>
+    </div>
 
     <div class="controls">
       <div class="dpad">
@@ -317,6 +317,10 @@ canvas {
     let dropCounter = 0;
     let dropInterval = 800;
     let lastTime = 0;
+
+    // параметры ускорения
+    const SPEED_STEP = 0.95;        // каждая очищенная линия ускоряет на 5%
+    const MIN_DROP_INTERVAL = 120;  // нижний предел скорости
 
     let gameStarted = false;
     const startOverlay = document.getElementById('startOverlay');
@@ -402,6 +406,9 @@ canvas {
         ++y;
         player.score += rowCount * 10;
         rowCount *= 2;
+
+        // ускоряем игру при каждой полностью очищенной линии
+        dropInterval = Math.max(MIN_DROP_INTERVAL, dropInterval * SPEED_STEP);
       }
       updateScore();
     }
@@ -432,6 +439,7 @@ canvas {
       if (collide(arena, player)) {
         arena.forEach(row => row.fill(0));
         player.score = 0;
+        dropInterval = 800;          // сброс скорости при game over
       }
     }
 
