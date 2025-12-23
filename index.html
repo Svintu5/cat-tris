@@ -43,7 +43,7 @@
 
   .screen {
   width: 360px;          /* ширина корпуса под экран */
-  height: 720px;         /* ровно в 2 раза выше (под 320x640) */
+  height: 480px;         /* ровно в 2 раза выше (под 320x640) */
   border-radius: 22px;
   background: #000000;
   box-shadow:
@@ -304,7 +304,7 @@ canvas {
       CAT_IMAGES[i] = img;
     });
 
-    const arena = createMatrix(10, 20);
+    const arena = createMatrix(10, 15);
 
     let player = { pos: { x: 0, y: 0 }, matrix: null, score: 0 };
     let dropCounter = 0;
