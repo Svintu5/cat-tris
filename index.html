@@ -270,6 +270,29 @@
       text-transform: uppercase;
       margin-top: 2px;
     }
+
+    .promo {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E6E6FF;
+  opacity: 0.9;
+}
+
+.promo-logo {
+  width: 28px;          /* подгони под свой логотип */
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px #110FFF);
+}
+
+.promo-text {
+  font-weight: 500;
+}
   </style>
 </head>
 <body>
@@ -286,7 +309,10 @@
       <div class="top-score">
         Top: <span id="topScore">0</span>
       </div>
-
+<div class="promo">
+  <img src="img/genlayer-logo.svg" alt="GenLayer" class="promo-logo">
+  <span class="promo-text">Made for</span>
+</div>
       <div class="screen-inner">
         <div id="startOverlay">Press Enter to start</div>
         <canvas width="240" height="360" id="game"></canvas>
