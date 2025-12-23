@@ -28,9 +28,8 @@
     }
 
 .device {
-  width: 360px;
-  min-height: 640px;           /* ДОБАВЬ ЭТУ СТРОКУ, можно 660–700 при желании */
-  padding: 16px 16px 24px;
+  width: 400px;
+  padding: 24px 24px 32px;
   border-radius: 32px;
   background: #9B6AF6;
   box-shadow:
@@ -39,19 +38,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
-   .screen {
-  width: 100%;
-  height: 420px;              /* фиксированная высота экрана */
+  .screen {
+  width: 360px;          /* ширина корпуса под экран */
+  height: 720px;         /* ровно в 2 раза выше (под 320x640) */
   border-radius: 22px;
   background: #000000;
   box-shadow:
     0 0 0 3px #282B5D,
     0 0 30px #110FFF;
   position: relative;
-  overflow: hidden;
+  overflow: visible;     /* НИЧЕГО не режем */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,12 +58,12 @@
 
 .screen-inner {
   position: relative;
-  width: 88%;
-  aspect-ratio: 1 / 2; /* 320x640 = 1:2, сохраняем пропорции поля */
+  width: 320px;          /* как у canvas */
+  height: 640px;         /* как у canvas */
   border-radius: 18px;
   background: #000000;
   box-shadow: 0 0 0 2px #282B5D inset;
-  overflow: hidden;
+  overflow: visible;     /* чтобы низ не резался */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,8 +72,6 @@
 /* ВАЖНО: не растягиваем по height/width независимо */
 canvas {
   display: block;
-  width: 100%;
-  height: 100%;
   border-radius: 18px;
   background: #000000;
 }
