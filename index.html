@@ -330,17 +330,17 @@
       CAT_IMAGES[i] = img;
     });
 
-    const arena = createMatrix(10, 15);   // поле 10x15
+    const arena = createMatrix(10, 15);
 
     let player = { pos: { x: 0, y: 0 }, matrix: null, score: 0 };
     let dropCounter = 0;
     let dropInterval = 800;
     let lastTime = 0;
 
-    const SPEED_STEP = 0.95;        // ускорение при чистке линий
-    const MIN_DROP_INTERVAL = 120;  // минимум
+    const SPEED_STEP = 0.95;
+    const MIN_DROP_INTERVAL = 120;
 
-    let topScore = parseInt(localStorage.getItem('cattris_top_score') || '0'); [web:192][web:209]
+    let topScore = parseInt(localStorage.getItem('cattris_top_score') || '0');
 
     let gameStarted = false;
     const startOverlay = document.getElementById('startOverlay');
@@ -558,7 +558,7 @@
       btn.addEventListener('mouseleave', release);
       btn.addEventListener('touchstart', press);
       btn.addEventListener('touchend', release);
-    }); [web:212][web:215]
+    });
 
     playerReset();
     updateScore();
