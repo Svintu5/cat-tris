@@ -400,20 +400,25 @@
       });
     }
 
-    function draw() {
-      context.fillStyle = '#000000';
-      context.fillRect(0, 0, canvas.width, canvas.height);
+function draw() {
+  context.fillStyle = '#000000';
+  context.fillRect(0, 0, canvas.width, canvas.height);
 
-      const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
-      const scaleY = canvas.height / (arena.length * CELL_HEIGHT);
-      const scale = Math.min(scaleX, scaleY);
+  const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
+  const scaleY = canvas.height / (arena.length * CELL_HEIGHT);
+  const scale = Math.min(scaleX, scaleY);
 
-      context.save();
-      context.scale(scale, scale);
-      drawMatrix(arena, { x: 0, y: 0 });
-      drawMatrix(player.matrix, player.pos);
-      context.restore();
-    }
+  context.save();
+  context.scale(scale, scale);
+  drawMatrix(arena, { x: 0, y: 0 });
+
+  // рисуем фигуру только после старта игры
+  if (gameStarted && player.matrix) {
+    drawMatrix(player.matrix, player.pos);
+  }
+
+  context.restore();
+}
 
     function arenaSweep() {
       let rowCount = 1;
