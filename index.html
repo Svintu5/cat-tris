@@ -37,33 +37,33 @@
       gap: 18px;
     }
 
-    .screen {
-      width: 100%;
-      height: 500px;  /* под поле 10x15 */
-      border-radius: 22px;
-      background: #000000;
-      box-shadow:
-        0 0 0 3px #282B5D,
-        0 0 30px #110FFF;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+   .screen {
+  width: 100%;
+  height: 400px;  /* под 240x360 + рамка */
+  border-radius: 22px;
+  background: #000000;
+  box-shadow:
+    0 0 0 3px #282B5D,
+    0 0 30px #110FFF;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    .screen-inner {
-      position: relative;
-      width: 320px;
-      height: 480px;  /* 10x15, чуть с запасом сверху/снизу */
-      border-radius: 18px;
-      background: #000000;
-      box-shadow: 0 0 0 2px #282B5D inset;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+ .screen-inner {
+  position: relative;
+  width: 240px;   /* как width canvas */
+  height: 360px;  /* как height canvas */
+  border-radius: 18px;
+  background: #000000;
+  box-shadow: 0 0 0 2px #282B5D inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
 canvas {
   display: block;
@@ -237,7 +237,7 @@ canvas {
           Score: <span id="score">0</span>
         </div>
         <div id="startOverlay">Press Enter to start</div>
-        <canvas width="320" height="640" id="game"></canvas>
+        <canvas width="240" height="360" id="game"></canvas>
       </div>
     </div>
 
