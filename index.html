@@ -27,21 +27,21 @@ html, body {
   color: #FFFFFF;
 }
 
-    .device {
-      width: 380px;
-      padding: 20px 20px 28px;
-      border-radius: 32px;
-      background: #9B6AF6;
-      box-shadow:
-        0 0 0 4px #E37DF7 inset,
-        0 18px 40px rgba(0,0,0,0.65);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 18px;
-    }
+.device {
+  width: 380px;
+  padding: 20px 20px 28px;
+  border-radius: 32px;
+  background: #9B6AF6;
+  box-shadow:
+    0 0 0 4px #E37DF7 inset,
+    0 18px 40px rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
 
-   .screen {
+.screen {
   width: 100%;
   height: 400px;
   border-radius: 22px;
@@ -56,14 +56,14 @@ html, body {
   overflow: hidden;
 }
 
- .screen-inner {
+.screen-inner {
   position: relative;
   width: 240px;
   height: 360px;
   border-radius: 18px;
   background: #000000;
   box-shadow: 0 0 0 2px #282B5D inset;
-  border: 1px solid #282B5D;          /* лёгкая 1px окантовка */
+  border: 1px solid #282B5D;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +78,7 @@ canvas {
   background: #000000;
 }
 
-  .hint-bar {
+.hint-bar {
   position: absolute;
   top: 60px;
   left: 50%;
@@ -91,11 +91,26 @@ canvas {
   text-shadow: 0 0 10px #110FFF;
   pointer-events: none;
 }
-    
+
 .info {
   position: absolute;
   top: 12px;
   left: 12px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 999px;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 600;
+  text-shadow: 0 0 6px #110FFF;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.top-score {
+  position: absolute;
+  top: 12px;
+  right: 12px;
   padding: 6px 10px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 999px;
@@ -121,131 +136,131 @@ canvas {
   pointer-events: none;
 }
 
-    #startOverlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.85);
-      box-shadow: 0 0 18px #9B6AF6;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-align: center;
-      border: 1px solid #9B6AF6;
-    }
+#startOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 18px #9B6AF6;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  border: 1px solid #9B6AF6;
+}
 
-    .controls {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 4px 10px 0;
-      gap: 8px;
-    }
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 10px 0;
+  gap: 8px;
+}
 
-    .dpad {
-      width: 55%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.dpad {
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .buttons-right {
-      width: 35%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.buttons-right {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .dpad-container {
-      position: relative;
-      width: 150px;
-      height: 150px;
-    }
+.dpad-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
 
-    .btn-circle {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      outline: none;
-      background: radial-gradient(circle at 30% 30%, #fffca8 0%, #ffe600 40%, #ffc300 70%, #ff9e00 100%);
-      box-shadow:
-        0 4px 0 rgba(0,0,0,0.35),
-        0 0 12px rgba(0,0,0,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 600;
-      color: #4b0040;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
-      user-select: none;
-      transition: transform 0.05s ease, box-shadow 0.05s ease, filter 0.05s ease;
-    }
+.btn-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: radial-gradient(circle at 30% 30%, #fffca8 0%, #ffe600 40%, #ffc300 70%, #ff9e00 100%);
+  box-shadow:
+    0 4px 0 rgba(0,0,0,0.35),
+    0 0 12px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b0040;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  user-select: none;
+  transition: transform 0.05s ease, box-shadow 0.05s ease, filter 0.05s ease;
+}
 
-    .btn-circle.blue {
-      background: radial-gradient(circle at 30% 30%, #c9f2ff 0%, #35d4ff 40%, #00a2ff 70%, #0070c0 100%);
-      color: #00163a;
-    }
+.btn-circle.blue {
+  background: radial-gradient(circle at 30% 30%, #c9f2ff 0%, #35d4ff 40%, #00a2ff 70%, #0070c0 100%);
+  color: #00163a;
+}
 
-    .btn-circle.btn-start {
-      width: 96px;
-      height: 96px;
-      font-size: 16px;
-    }
+.btn-circle.btn-start {
+  width: 96px;
+  height: 96px;
+  font-size: 16px;
+}
 
-    .btn-circle.pressed {
-      transform: translateY(2px);
-      box-shadow:
-        0 1px 0 rgba(0,0,0,0.4),
-        0 0 8px rgba(0,0,0,0.5);
-      filter: brightness(0.9);
-    }
+.btn-circle.pressed {
+  transform: translateY(2px);
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.4),
+    0 0 8px rgba(0,0,0,0.5);
+  filter: brightness(0.9);
+}
 
-    .dpad-button {
-      position: absolute;
-    }
+.dpad-button {
+  position: absolute;
+}
 
-    .dpad-button[data-action="up"] {
-      top: 8px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
+.dpad-button[data-action="up"] {
+  top: 8px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 
-    .dpad-button[data-action="down"] {
-      bottom: 8px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
+.dpad-button[data-action="down"] {
+  bottom: 8px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 
-    .dpad-button[data-action="left"] {
-      left: 8px;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
+.dpad-button[data-action="left"] {
+  left: 8px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
 
-    .dpad-button[data-action="right"] {
-      right: 8px;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
+.dpad-button[data-action="right"] {
+  right: 8px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
 
-    .btn-stack {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
+.btn-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
 
-    .btn-label {
-      font-size: 8px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
+.btn-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
   </style>
 </head>
 <body>
@@ -257,6 +272,9 @@ canvas {
     <div class="screen">
       <div class="info">
         Score: <span id="score">0</span>
+      </div>
+      <div class="top-score">
+        Top: <span id="topScore">0</span>
       </div>
 
       <div class="screen-inner">
@@ -322,6 +340,9 @@ canvas {
     // параметры ускорения
     const SPEED_STEP = 0.95;        // каждая очищенная линия ускоряет на 5%
     const MIN_DROP_INTERVAL = 120;  // нижний предел скорости
+
+    // top score (localStorage)
+    let topScore = parseInt(localStorage.getItem('cattris_top_score') || '0'); [web:192][web:209]
 
     let gameStarted = false;
     const startOverlay = document.getElementById('startOverlay');
@@ -480,6 +501,13 @@ canvas {
 
     function updateScore() {
       document.getElementById('score').textContent = player.score;
+
+      // обновляем топ‑скор
+      if (player.score > topScore) {
+        topScore = player.score;
+        localStorage.setItem('cattris_top_score', topScore);
+      }
+      document.getElementById('topScore').textContent = topScore;
     }
 
     function handleAction(action) {
@@ -534,6 +562,7 @@ canvas {
       btn.addEventListener('click', e => e.preventDefault());
     });
 
+    // инициализация
     playerReset();
     updateScore();
     update();
