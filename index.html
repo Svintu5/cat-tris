@@ -3,9 +3,7 @@
 <head>
   <title>😻 Cat-tris GenLayer Edition</title>
   <meta charset="UTF-8">
-
   <link href="https://fonts.cdnfonts.com/css/switzer" rel="stylesheet">
-
   <style>
     * { box-sizing: border-box; }
 
@@ -28,27 +26,27 @@
     }
 
     .device {
-  position: relative;            /* чтобы шапка цеплялась к девайсу */
-  width: 380px;
-  padding: 20px 20px 28px;
-  border-radius: 32px;
-  background: #9B6AF6;
-  box-shadow:
-    0 0 0 4px #E37DF7 inset,
-    0 18px 40px rgba(0,0,0,0.65);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-}
+      position: relative;
+      width: 380px;
+      padding: 20px 20px 28px;
+      border-radius: 32px;
+      background: #9B6AF6;
+      box-shadow:
+        0 0 0 4px #E37DF7 inset,
+        0 18px 40px rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
 
-.xmas-hat {
-  position: absolute;
-  top: -80px;        /* подбери смещение под свою картинку */
-  left: -50px;
-  width: 240px;       /* размер шапки */
-  pointer-events: none;   /* чтобы не мешала кликам */
-}
+    .xmas-hat {
+      position: absolute;
+      top: -80px;
+      left: -50px;
+      width: 240px;
+      pointer-events: none;
+    }
 
     .screen {
       width: 100%;
@@ -271,28 +269,31 @@
       margin-top: 2px;
     }
 
+    /* промо-бейдж под корпусом, справа */
     .promo {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #E6E6FF;
-  opacity: 0.9;
-}
+      width: 380px;          /* как .device */
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #E6E6FF;
+      opacity: 0.9;
+    }
 
-.promo-logo {
-  width: 28px;          /* подгони под свой логотип */
-  height: 28px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px #110FFF);
-}
+    .promo-logo {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px #110FFF);
+    }
 
-.promo-text {
-  font-weight: 500;
-}
+    .promo-text {
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -300,8 +301,10 @@
   <div class="hint-bar">
     ←→ Move | ↑ Rotate | ↓ Drop
   </div>
+
   <div class="device">
-      <img src="img/hat.png" alt="" class="xmas-hat">
+    <img src="img/hat.png" alt="" class="xmas-hat">
+
     <div class="screen">
       <div class="info">
         Score: <span id="score">0</span>
@@ -309,10 +312,7 @@
       <div class="top-score">
         Top: <span id="topScore">0</span>
       </div>
-<div class="promo">
-  <img src="img/genlayer-logo.svg" alt="GenLayer" class="promo-logo">
-  <span class="promo-text">Made for</span>
-</div>
+
       <div class="screen-inner">
         <div id="startOverlay">Press Enter to start</div>
         <canvas width="240" height="360" id="game"></canvas>
@@ -337,6 +337,12 @@
     </div>
   </div>
 
+  <!-- промо под корпусом -->
+  <div class="promo">
+    <span class="promo-text">Made for</span>
+    <img src="img/genlayer-logo.svg" alt="GenLayer" class="promo-logo">
+  </div>
+
   <script>
     const canvas = document.getElementById('game');
     const context = canvas.getContext('2d');
@@ -346,7 +352,7 @@
     let logoBgReady = false;
     logoBg.src = 'img/logo.png';
     logoBg.onload = () => { logoBgReady = true; };
-    
+
     const CELL_SIZE = 24;
     const CELL_HEIGHT = 24;
 
@@ -443,39 +449,36 @@
       });
     }
 
-function draw() {
-  context.fillStyle = '#000000';
-  context.fillRect(0, 0, canvas.width, canvas.height);
+    function draw() {
+      context.fillStyle = '#000000';
+      context.fillRect(0, 0, canvas.width, canvas.height);
 
-  const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
-  const scaleY = canvas.height / (arena.length * CELL_HEIGHT);
-  const scale = Math.min(scaleX, scaleY);
+      const scaleX = canvas.width / (arena[0].length * CELL_SIZE);
+      const scaleY = canvas.height / (arena.length * CELL_HEIGHT);
+      const scale = Math.min(scaleX, scaleY);
 
-  context.save();
-  context.scale(scale, scale);
+      context.save();
+      context.scale(scale, scale);
 
-  // фон‑логотип под стаканом
-  if (logoBgReady) {
-    context.globalAlpha = 0.22; // лёгкая прозрачность
-    context.drawImage(
-      logoBg,
-      0, 0,
-      arena[0].length * CELL_SIZE,
-      arena.length * CELL_HEIGHT
-    );
-    context.globalAlpha = 1;
-  }
+      if (logoBgReady) {
+        context.globalAlpha = 0.22;
+        context.drawImage(
+          logoBg,
+          0, 0,
+          arena[0].length * CELL_SIZE,
+          arena.length * CELL_HEIGHT
+        );
+        context.globalAlpha = 1;
+      }
 
-  // статичный стакан
-  drawMatrix(arena, { x: 0, y: 0 });
+      drawMatrix(arena, { x: 0, y: 0 });
 
-  // фигура только после старта
-  if (gameStarted && player.matrix) {
-    drawMatrix(player.matrix, player.pos);
-  }
+      if (gameStarted && player.matrix) {
+        drawMatrix(player.matrix, player.pos);
+      }
 
-  context.restore();
-}
+      context.restore();
+    }
 
     function arenaSweep() {
       let rowCount = 1;
@@ -511,25 +514,24 @@ function draw() {
       if (collide(arena, player)) player.pos.x -= dir;
     }
 
-function playerReset() {
-  const pieces = 'TJLOSZI';
-  player.matrix = createPiece(pieces[(pieces.length * Math.random()) | 0]);
-  player.pos.y = 0;
-  player.pos.x =
-    (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
-  if (collide(arena, player)) {
-    arena.forEach(row => row.fill(0));
-    player.score = 0;
-    dropInterval = 800;
+    function playerReset() {
+      const pieces = 'TJLOSZI';
+      player.matrix = createPiece(pieces[(pieces.length * Math.random()) | 0]);
+      player.pos.y = 0;
+      player.pos.x =
+        (arena[0].length / 2 | 0) - (player.matrix[0].length / 2 | 0);
+      if (collide(arena, player)) {
+        arena.forEach(row => row.fill(0));
+        player.score = 0;
+        dropInterval = 800;
 
-    // game over
-    gameStarted = false;
-    gameOver = true;
-    startOverlay.textContent = 'Game Over Press Enter';
-    startOverlay.style.display = 'block';
-  }
-}
-    
+        gameStarted = false;
+        gameOver = true;
+        startOverlay.textContent = 'Game Over Press Enter';
+        startOverlay.style.display = 'block';
+      }
+    }
+
     function playerRotate(dir) {
       let offset = 1;
       rotate(player.matrix, dir);
@@ -574,43 +576,42 @@ function playerReset() {
       document.getElementById('topScore').textContent = topScore;
     }
 
-   function handleAction(action) {
-  if (action === 'start') {
-    // запуск и рестарт по кнопке
-    gameOver = false;
-    gameStarted = true;
-    startOverlay.style.display = 'none';
-    startOverlay.textContent = 'Press Enter to start';
-    arena.forEach(row => row.fill(0));
-    player.score = 0;
-    dropInterval = 800;
-    playerReset();
-    lastTime = 0;
-    updateScore();
-    return;
-  }
+    function handleAction(action) {
+      if (action === 'start') {
+        gameOver = false;
+        gameStarted = true;
+        startOverlay.style.display = 'none';
+        startOverlay.textContent = 'Press Enter to start';
+        arena.forEach(row => row.fill(0));
+        player.score = 0;
+        dropInterval = 800;
+        playerReset();
+        lastTime = 0;
+        updateScore();
+        return;
+      }
 
-  if (!gameStarted) return;
+      if (!gameStarted) return;
 
-  if (action === 'left') playerMove(-1);
-  if (action === 'right') playerMove(1);
-  if (action === 'down') playerDrop();
-  if (action === 'up') playerRotate(1);
-}
+      if (action === 'left') playerMove(-1);
+      if (action === 'right') playerMove(1);
+      if (action === 'down') playerDrop();
+      if (action === 'up') playerRotate(1);
+    }
 
-document.addEventListener('keydown', event => {
-  if (event.key === 'Enter') {
-    handleAction('start');   // и старт, и рестарт
-    return;
-  }
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        handleAction('start');
+        return;
+      }
 
-  if (!gameStarted) return;
+      if (!gameStarted) return;
 
-  if (event.keyCode === 37) handleAction('left');
-  else if (event.keyCode === 39) handleAction('right');
-  else if (event.keyCode === 40) handleAction('down');
-  else if (event.keyCode === 38) handleAction('up');
-});
+      if (event.keyCode === 37) handleAction('left');
+      else if (event.keyCode === 39) handleAction('right');
+      else if (event.keyCode === 40) handleAction('down');
+      else if (event.keyCode === 38) handleAction('up');
+    });
 
     document.querySelectorAll('[data-action]').forEach(btn => {
       const action = btn.getAttribute('data-action');
